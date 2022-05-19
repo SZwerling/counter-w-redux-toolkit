@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'; //to call from reducer
+import { increment, decrement, incrementByAmount } from './counter'; //import the actions from the reducer
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+    const { count } = useSelector(state => state.counter) //destructure the count var from the counter reducer
+    const dispatch = useDispatch() //use to call any action from any reducer
+    return(
+        <div className="app">
+            <h1>The count is: {count}</h1>
+            <button onClick={() => dispatch(increment())}>increment</button>
+            <button onClick={() => dispatch(decrement())}>decrement</button>
+            <button onClick={() => dispatch(incrementByAmount(22))}>add 22</button>
+        </div>
+    )
 }
+
 
 export default App;
